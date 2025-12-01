@@ -34,19 +34,11 @@ export function Header() {
       <div className="container flex items-center justify-between">
         <Link href="/">
           <a className="flex items-center gap-3 group">
-            <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-gradient-to-br from-[#7b61ff] to-[#18d4d4] p-[1px]">
-              <div className="flex h-full w-full items-center justify-center rounded-xl bg-black/90 backface-hidden">
-                <span className="text-xl font-bold text-white">F</span>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-space text-xl font-bold tracking-tight text-white">
-                FlowCargo
-              </span>
-              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
-                By Mindlink Lab
-              </span>
-            </div>
+            <img 
+              src="/images/logo-flowcargo.png" 
+              alt="FlowCargo Logo" 
+              className="h-12 w-auto object-contain"
+            />
           </a>
         </Link>
 

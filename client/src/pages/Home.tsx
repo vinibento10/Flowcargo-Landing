@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { N8nChat } from "@/components/N8nChat";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import { ArrowRight, CheckCircle2, Clock, MessageSquare, BarChart3, Truck, ShieldCheck, Zap } from "lucide-react";
 
 export default function Home() {
@@ -107,6 +108,9 @@ export default function Home() {
                   <img 
                     src="/images/hero-logistics-futuristic.png" 
                     alt="FlowCargo Dashboard" 
+                    loading="lazy"
+                    width="800"
+                    height="600"
                     className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
                   />
                   
@@ -182,6 +186,7 @@ export default function Home() {
                     <img 
                       src="/images/feature-automation.png" 
                       alt="Agendamento Automatizado" 
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
@@ -205,6 +210,7 @@ export default function Home() {
                     <img 
                       src="/images/feature-whatsapp-notification.png" 
                       alt="Notificações WhatsApp" 
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
@@ -228,6 +234,7 @@ export default function Home() {
                     <img 
                       src="/images/logistics-terminal-night.png" 
                       alt="Gestão de Filas" 
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
@@ -463,6 +470,7 @@ export default function Home() {
 
       <Footer />
       <WhatsAppButton />
+      <ScrollToTop />
       <N8nChat />
     </div>
   );

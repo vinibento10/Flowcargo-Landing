@@ -6,13 +6,12 @@ export function Footer() {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#7b61ff] to-[#18d4d4] flex items-center justify-center text-white font-bold">
-                F
-              </div>
-              <span className="font-space text-xl font-bold text-white">
-                FlowCargo
-              </span>
+            <div className="mb-6">
+              <img 
+                src="/images/logo-flowcargo.png" 
+                alt="FlowCargo Logo" 
+                className="h-10 w-auto object-contain"
+              />
             </div>
             <p className="text-muted-foreground max-w-md mb-6">
               A solução completa para empresas que precisam descomplicar a gestão de transporte, reduzir custos e integrar sua operação logística com eficiência e tecnologia.
@@ -28,9 +27,10 @@ export function Footer() {
               </a>
               <a
                 href="mailto:viniciusalves@mindlinklab.com.br"
-                className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center text-muted-foreground hover:bg-[#18d4d4] hover:text-white transition-all duration-300"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 text-muted-foreground hover:bg-[#18d4d4] hover:text-white transition-all duration-300 text-sm"
               >
-                <Mail size={20} />
+                <Mail size={18} />
+                <span>viniciusalves@mindlinklab.com.br</span>
               </a>
             </div>
           </div>
