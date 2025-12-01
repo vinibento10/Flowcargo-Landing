@@ -27,8 +27,8 @@ export function ImageWithSkeleton({ className, src, alt, ...props }: ImageWithSk
         src={src}
         alt={alt}
         className={cn(
-          "w-full h-full object-cover transition-opacity duration-500",
-          isLoaded ? "opacity-100" : "opacity-0"
+          "w-full h-full object-cover transition-all duration-700 ease-in-out",
+          isLoaded ? "opacity-100 blur-0 scale-100" : "opacity-0 blur-xl scale-105"
         )}
         onLoad={() => setIsLoaded(true)}
         {...props}
