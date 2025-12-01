@@ -48,6 +48,7 @@ export function N8nChat() {
           avatar: {
             bgcolor: '#7b61ff',
             color: '#ffffff',
+            src: window.location.origin + '/images/harry-avatar.png',
           },
           userMessage: {
             bgcolor: '#18d4d4',
