@@ -1,0 +1,106 @@
+import { useState, useEffect } from "react";
+import { Link } from "wouter";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+export function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "Soluções", href: "#features" },
+    { name: "Números", href: "#numbers" },
+    { name: "Como funciona", href: "#how" },
+  ];
+
+  return (
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b border-transparent",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-md border-white/5 py-3"
+          : "bg-transparent py-5"
+      )}
+    >
+      <div className="container flex items-center justify-between">
+        <Link href="/">
+          <a className="flex items-center gap-3 group">
+            <div className="relative h-10 w-10 overflow-hidden rounded-xl bg-gradient-to-br from-[#7b61ff] to-[#18d4d4] p-[1px]">
+              <div className="flex h-full w-full items-center justify-center rounded-xl bg-black/90 backface-hidden">
+                <span className="text-xl font-bold text-white">F</span>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-space text-xl font-bold tracking-tight text-white">
+                FlowCargo
+              </span>
+              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">
+                By Mindlink Lab
+              </span>
+            </div>
+          </a>
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-muted-foreground hover:text-white transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+          <Button
+            asChild
+            className="bg-gradient-to-r from-[#7b61ff] to-[#18d4d4] hover:opacity-90 text-white font-bold border-0 shadow-[0_0_20px_rgba(123,97,255,0.3)] hover:shadow-[0_0_30px_rgba(123,97,255,0.5)] transition-all duration-300"
+          >
+            <a href="#contact">Agende uma demo</a>
+          </Button>
+        </nav>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden text-white p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#040406]/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-5">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-lg font-medium text-muted-foreground hover:text-white py-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {link.name}
+            </a>
+          ))}
+          <Button
+            asChild
+            className="w-full bg-gradient-to-r from-[#7b61ff] to-[#18d4d4] text-white font-bold mt-2"
+          >
+            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+              Agende uma demo
+            </a>
+          </Button>
+        </div>
+      )}
+    </header>
+  );
+}
