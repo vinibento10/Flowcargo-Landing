@@ -25,10 +25,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b border-transparent",
+        "fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b",
         isScrolled
-          ? "bg-background/80 backdrop-blur-md border-white/5 py-3"
-          : "bg-transparent py-5"
+          ? "bg-[#040406]/80 backdrop-blur-md border-white/10 py-3 shadow-lg shadow-black/20"
+          : "bg-transparent border-transparent py-5"
       )}
     >
       <div className="container flex items-center justify-between">
@@ -36,7 +36,7 @@ export function Header() {
             <img 
               src="/images/logo-flowcargo.png" 
               alt="FlowCargo Logo" 
-              className="h-12 w-auto object-contain"
+              className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
               onError={(e) => {
                 e.currentTarget.src = "https://placehold.co/200x80/040406/7b61ff?text=FlowCargo";
               }}
@@ -49,9 +49,10 @@ export function Header() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-white transition-colors"
+              className="text-sm font-medium text-muted-foreground hover:text-white transition-all duration-300 relative group/link"
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#7b61ff] to-[#18d4d4] transition-all duration-300 group-hover/link:w-full" />
             </a>
           ))}
           <Button
@@ -82,6 +83,7 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#7b61ff] to-[#18d4d4] transition-all duration-300 group-hover/link:w-full" />
             </a>
           ))}
           <Button
