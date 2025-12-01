@@ -8,8 +8,60 @@ import { ArrowRight, CheckCircle2, Clock, MessageSquare, Truck, BarChart3, Shiel
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 import { motion } from "framer-motion";
 import { MobileCTA } from "@/components/MobileCTA";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Home() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    nome: "",
+    email: "",
+    telefone: "",
+    mensagem: "",
+    empresa: "" // Added empresa field to state as it might be useful, though not in current form UI shown in snippet but good practice or if we add it back
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+      
+      if (!webhookUrl) {
+        throw new Error("Webhook URL not configured");
+      }
+
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          source: "landing_page_contact_form",
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+        setFormData({ nome: "", email: "", telefone: "", mensagem: "", empresa: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error sending form:", error);
+      toast.error("Erro ao enviar mensagem. Por favor, tente novamente ou contate-nos via WhatsApp.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
   return (
     <div className="min-h-screen bg-[#040406] text-foreground overflow-x-hidden font-sans selection:bg-[#7b61ff]/30 selection:text-white">
       <Header />
@@ -520,48 +572,78 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
                       <label className="text-sm font-medium text-muted-foreground mb-1 block">Nome completo</label>
                       <input 
                         type="text" 
+                        name="nome"
+                        value={formData.nome}
+                        onChange={handleChange}
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#7b61ff] focus:ring-1 focus:ring-[#7b61ff] transition-all"
                         placeholder="Seu nome"
                         required
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-muted-foreground mb-1 block">Empresa</label>
+                      <input 
+                        type="text" 
+                        name="empresa"
+                        value={formData.empresa}
+                        onChange={handleChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#7b61ff] focus:ring-1 focus:ring-[#7b61ff] transition-all"
+                        placeholder="Nome da empresa"
+                        required
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-muted-foreground mb-1 block">E-mail profissional</label>
                       <input 
                         type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#7b61ff] focus:ring-1 focus:ring-[#7b61ff] transition-all"
                         placeholder="seu@email.com"
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-muted-foreground mb-1 block">Telefone / WhatsApp</label>
                       <input 
                         type="tel" 
+                        name="telefone"
+                        value={formData.telefone}
+                        onChange={handleChange}
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#7b61ff] focus:ring-1 focus:ring-[#7b61ff] transition-all"
                         placeholder="(00) 00000-0000"
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-muted-foreground mb-1 block">Mensagem (opcional)</label>
                       <textarea 
+                        name="mensagem"
+                        value={formData.mensagem}
+                        onChange={handleChange}
                         rows={3}
                         className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#7b61ff] focus:ring-1 focus:ring-[#7b61ff] transition-all resize-none"
                         placeholder="Conte um pouco sobre sua operação..."
+                        disabled={isSubmitting}
                       ></textarea>
                     </div>
                     
                     <Button 
                       type="submit"
                       className="w-full bg-gradient-brand hover:opacity-90 text-white font-bold h-12 rounded-lg shadow-lg mt-2"
+                      disabled={isSubmitting}
                     >
-                      Solicitar demonstração
+                      {isSubmitting ? "Enviando..." : "Solicitar demonstração"}
                     </Button>
                   </form>
                 </motion.div>
