@@ -34,11 +34,11 @@ export function Header() {
       <div className="container flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
             <img 
-              src="/images/logo-flowcargo.png" 
+              src="/images/logo-flowcargo-v2.png" 
               alt="FlowCargo Logo" 
-              className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
+              className="h-12 md:h-14 w-auto object-contain transition-all duration-300 hover:scale-105 drop-shadow-[0_0_10px_rgba(123,97,255,0.3)]"
               onError={(e) => {
-                e.currentTarget.src = "https://placehold.co/200x80/040406/7b61ff?text=FlowCargo";
+                e.currentTarget.src = "/images/logo-flowcargo.png";
               }}
             />
         </Link>

@@ -8,11 +8,11 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="mb-6">
               <img 
-                src="/images/logo-flowcargo.png" 
+                src="/images/logo-flowcargo-v2.png" 
                 alt="FlowCargo Logo" 
-                className="h-10 w-auto object-contain"
+                className="h-12 w-auto object-contain drop-shadow-[0_0_10px_rgba(123,97,255,0.3)]"
                 onError={(e) => {
-                  e.currentTarget.src = "https://placehold.co/200x80/040406/7b61ff?text=FlowCargo";
+                  e.currentTarget.src = "/images/logo-flowcargo.png";
                 }}
               />
             </div>

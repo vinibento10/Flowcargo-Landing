@@ -61,10 +61,12 @@ export default function Home() {
                   comunique motoristas.
                 </h1>
                 
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl">
-                  FlowCargo organiza o fluxo de caminhões, agenda coletas/descargas, notifica motoristas via WhatsApp e gera relatórios em tempo real — tudo integrado ao seu ERP/CRM.
-                </p>
-                
+          <h2 className="text-xl md:text-2xl font-medium text-[#18d4d4] mb-4 reveal delay-50">
+                Automação Logística Inteligente
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg reveal delay-100 leading-relaxed">
+                FlowCargo organiza o fluxo de caminhões, agenda coletas/descargas, notifica motoristas via WhatsApp e gera relatórios em tempo real — tudo integrado ao seu ERP/CRM para eliminar filas e custos extras.
+              </p>               
                 <div className="flex flex-wrap gap-4">
                   <Button 
                     size="lg" 
@@ -102,20 +104,24 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="reveal delay-200 relative">
-                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#0b0b0f]/80 backdrop-blur-xl group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#7b61ff]/10 to-[#18d4d4]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="reveal delay-200 relative perspective-1000">
+                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#0b0b0f]/80 backdrop-blur-xl group transform transition-all duration-700 hover:rotate-y-2 hover:scale-[1.02]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#7b61ff]/20 to-[#18d4d4]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+                  
+                  {/* Neon Glow Borders */}
+                  <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-[#7b61ff]/50 transition-colors duration-500 z-20 pointer-events-none box-shadow-[0_0_30px_rgba(123,97,255,0.2)]" />
+                  
                   <img 
                     src="/images/hero-logistics-futuristic.png" 
-                    alt="FlowCargo Dashboard" 
+                    alt="FlowCargo Dashboard 3D Mockup" 
                     loading="lazy"
                     width="800"
                     height="600"
                     className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
                   />
                   
-                  {/* Floating KPI Card 1 */}
-                  <div className="absolute top-6 right-6 glass-panel p-4 rounded-xl flex flex-col gap-1 animate-in fade-in zoom-in duration-700 delay-500">
+                  {/* Floating KPI Card 1 - 3D Effect */}
+                  <div className="absolute top-6 right-6 glass-panel p-4 rounded-xl flex flex-col gap-1 animate-in fade-in zoom-in duration-700 delay-500 shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-white/10 backdrop-blur-md transform transition-transform hover:translate-z-10">
                     <span className="text-xs text-muted-foreground uppercase tracking-wider">Tempo médio</span>
                     <span className="text-2xl font-bold text-white">18 min</span>
                     <span className="text-xs text-[#18d4d4] flex items-center gap-1">
@@ -123,9 +129,9 @@ export default function Home() {
                     </span>
                   </div>
 
-                  {/* Floating KPI Card 2 */}
-                  <div className="absolute bottom-6 left-6 glass-panel p-4 rounded-xl flex items-center gap-4 animate-in fade-in zoom-in duration-700 delay-700">
-                    <div className="h-10 w-10 rounded-full bg-[#25D366] flex items-center justify-center text-white">
+                  {/* Floating KPI Card 2 - 3D Effect */}
+                  <div className="absolute bottom-6 left-6 glass-panel p-4 rounded-xl flex items-center gap-4 animate-in fade-in zoom-in duration-700 delay-700 shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-white/10 backdrop-blur-md transform transition-transform hover:translate-z-10">
+                    <div className="h-10 w-10 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/20 animate-pulse">
                       <MessageSquare size={20} />
                     </div>
                     <div>
@@ -134,6 +140,10 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+                
+                {/* Enhanced Decorative Elements */}
+                <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#7b61ff] rounded-full blur-[100px] opacity-30 animate-pulse" />
+                <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#18d4d4] rounded-full blur-[100px] opacity-30 animate-pulse delay-1000" />
               </div>
             </div>
           </div>
@@ -179,8 +189,8 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-8">
               {/* Feature 1 */}
-              <div className="reveal glass-panel rounded-2xl p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-colors duration-300">
-                <div className="bg-[#0b0b0f] rounded-xl h-full overflow-hidden">
+              <div className="reveal glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]">
+                <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
                     <img 
@@ -191,10 +201,10 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-6 relative z-20 -mt-12">
-                    <div className="h-12 w-12 rounded-lg bg-gradient-brand flex items-center justify-center text-white mb-4 shadow-lg shadow-[#7b61ff]/20">
-                      <Clock size={24} />
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-brand flex items-center justify-center text-white mb-6 shadow-lg shadow-[#7b61ff]/20 group-hover:scale-110 transition-transform duration-300">
+                      <Clock size={28} />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">Agendamento Automatizado</h3>
+                    <h3 className="text-[22px] font-bold text-white mb-3 group-hover:text-[#18d4d4] transition-colors">Agendamento Automatizado</h3>
                     <p className="text-muted-foreground leading-relaxed">
                       Reduza o tempo de espera e elimine filas com nosso sistema inteligente de slots e janelas de tempo.
                     </p>
@@ -203,8 +213,8 @@ export default function Home() {
               </div>
 
               {/* Feature 2 */}
-              <div className="reveal delay-100 glass-panel rounded-2xl p-1 overflow-hidden group hover:border-[#18d4d4]/50 transition-colors duration-300">
-                <div className="bg-[#0b0b0f] rounded-xl h-full overflow-hidden">
+              <div className="reveal delay-100 glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#18d4d4]/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(24,212,212,0.15)]">
+                <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
                     <img 
@@ -215,10 +225,10 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-6 relative z-20 -mt-12">
-                    <div className="h-12 w-12 rounded-lg bg-gradient-brand flex items-center justify-center text-white mb-4 shadow-lg shadow-[#18d4d4]/20">
-                      <MessageSquare size={24} />
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-brand flex items-center justify-center text-white mb-6 shadow-lg shadow-[#18d4d4]/20 group-hover:scale-110 transition-transform duration-300">
+                      <MessageSquare size={28} />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">Notificações WhatsApp</h3>
+                    <h3 className="text-[22px] font-bold text-white mb-3 group-hover:text-[#18d4d4] transition-colors">Notificações WhatsApp</h3>
                     <p className="text-muted-foreground leading-relaxed">
                       Comunique-se automaticamente com motoristas. Envie documentos, status e previsões de chegada sem intervenção manual.
                     </p>
@@ -227,8 +237,8 @@ export default function Home() {
               </div>
 
               {/* Feature 3 */}
-              <div className="reveal delay-200 glass-panel rounded-2xl p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-colors duration-300">
-                <div className="bg-[#0b0b0f] rounded-xl h-full overflow-hidden">
+<div className="reveal delay-200 glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]">
+                <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
                     <img 
@@ -239,12 +249,12 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-6 relative z-20 -mt-12">
-                    <div className="h-12 w-12 rounded-lg bg-gradient-brand flex items-center justify-center text-white mb-4 shadow-lg shadow-[#7b61ff]/20">
-                      <BarChart3 size={24} />
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-brand flex items-center justify-center text-white mb-6 shadow-lg shadow-[#7b61ff]/20 group-hover:scale-110 transition-transform duration-300">
+                      <Truck size={28} />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-2">Gestão de Filas</h3>
+                    <h3 className="text-[22px] font-bold text-white mb-3 group-hover:text-[#18d4d4] transition-colors">Gestão de Filas</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Priorize cargas críticas, otimize o uso do pátio e tenha visibilidade total da operação em tempo real.
+                      Controle total do pátio. Saiba exatamente onde cada veículo está e otimize a movimentação interna.
                     </p>
                   </div>
                 </div>
