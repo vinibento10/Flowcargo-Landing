@@ -112,7 +112,7 @@ export default function Home() {
                   <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-[#7b61ff]/50 transition-colors duration-500 z-20 pointer-events-none box-shadow-[0_0_30px_rgba(123,97,255,0.2)]" />
                   
                   <img 
-                    src="/images/hero-logistics-futuristic.png" 
+                    src="/images/hero-logistics-futuristic.webp" 
                     alt="FlowCargo Dashboard 3D Mockup" 
                     loading="lazy"
                     width="800"
@@ -194,7 +194,7 @@ export default function Home() {
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
                     <img 
-                      src="/images/feature-automation.png" 
+                      src="/images/feature-automation.webp" 
                       alt="Agendamento Automatizado" 
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -218,7 +218,7 @@ export default function Home() {
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
                     <img 
-                      src="/images/feature-whatsapp-notification.png" 
+                      src="/images/feature-whatsapp-notification.webp" 
                       alt="Notificações WhatsApp" 
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -242,7 +242,7 @@ export default function Home() {
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
                     <img 
-                      src="/images/logistics-terminal-night.png" 
+                      src="/images/logistics-terminal-night.webp" 
                       alt="Gestão de Filas" 
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
