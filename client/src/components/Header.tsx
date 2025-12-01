@@ -34,11 +34,11 @@ export function Header() {
       <div className="container flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
             <img 
-              src="/images/logo-flowcargo-v2.png" 
+              src="/images/logo-flowcargo-final.webp" 
               alt="FlowCargo Logo" 
               className="h-12 md:h-14 w-auto object-contain transition-all duration-300 hover:scale-105 drop-shadow-[0_0_10px_rgba(123,97,255,0.3)]"
               onError={(e) => {
-                e.currentTarget.src = "/images/logo-flowcargo.png";
+                e.currentTarget.src = "/images/logo-flowcargo-final.png";
               }}
             />
         </Link>

@@ -8,11 +8,11 @@ export function Footer() {
           <div className="col-span-1 md:col-span-2">
             <div className="mb-6">
               <img 
-                src="/images/logo-flowcargo-v2.png" 
+                src="/images/logo-flowcargo-final.webp" 
                 alt="FlowCargo Logo" 
                 className="h-12 w-auto object-contain drop-shadow-[0_0_10px_rgba(123,97,255,0.3)]"
                 onError={(e) => {
-                  e.currentTarget.src = "/images/logo-flowcargo.png";
+                  e.currentTarget.src = "/images/logo-flowcargo-final.png";
                 }}
               />
             </div>
