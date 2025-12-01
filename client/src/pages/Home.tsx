@@ -8,6 +8,7 @@ import { ArrowRight, CheckCircle2, Clock, MessageSquare, Truck, BarChart3, Shiel
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 import { motion } from "framer-motion";
 import { MobileCTA } from "@/components/MobileCTA";
+import { ROICalculator } from "@/components/ROICalculator";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -522,6 +523,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ROI CALCULATOR */}
+        <ROICalculator />
 
         {/* CONTACT / CTA */}
         <section id="contact" className="py-24 relative overflow-hidden">
