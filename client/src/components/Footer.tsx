@@ -11,6 +11,9 @@ export function Footer() {
                 src="/images/logo-flowcargo.png" 
                 alt="FlowCargo Logo" 
                 className="h-10 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.src = "https://placehold.co/200x80/040406/7b61ff?text=FlowCargo";
+                }}
               />
             </div>
             <p className="text-muted-foreground max-w-md mb-6">

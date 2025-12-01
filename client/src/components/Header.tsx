@@ -37,6 +37,9 @@ export function Header() {
               src="/images/logo-flowcargo.png" 
               alt="FlowCargo Logo" 
               className="h-12 w-auto object-contain"
+              onError={(e) => {
+                e.currentTarget.src = "https://placehold.co/200x80/040406/7b61ff?text=FlowCargo";
+              }}
             />
         </Link>
 

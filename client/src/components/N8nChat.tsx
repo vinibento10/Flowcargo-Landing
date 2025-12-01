@@ -16,8 +16,8 @@ export function N8nChat() {
 
       createChat({
         webhookUrl: 'https://n8n.mindlinklab.com.br/webhook/a2ef1ee4-28bb-49e1-98a1-77c0232424e7/chat',
-        title: "FlowCargo Assistant",
-        subtitle: "Seu assistente logístico inteligente",
+        title: "Agende sua demo e tire dúvidas",
+        subtitle: "Assistente FlowCargo",
         theme: {
           chatBubble: {
             background: "linear-gradient(90deg, #7b61ff, #18d4d4)",
