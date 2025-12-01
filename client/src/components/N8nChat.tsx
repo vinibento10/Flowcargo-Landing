@@ -26,11 +26,11 @@ export function N8nChat() {
         ],
         i18n: {
           en: {
-            title: 'Olá! 👋',
-            subtitle: 'Inicie um chat. Estamos aqui para ajudar 24/7.',
+            title: 'Harry Agente Logístico',
+            subtitle: 'Tire dúvidas sobre nosso sistema',
             footer: '',
             getStarted: 'Iniciar conversa',
-            inputPlaceholder: 'Digite sua mensagem...',
+            inputPlaceholder: 'Outra coisa...',
           },
         },
         style: {
