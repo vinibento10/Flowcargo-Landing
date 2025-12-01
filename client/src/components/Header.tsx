@@ -32,14 +32,12 @@ export function Header() {
       )}
     >
       <div className="container flex items-center justify-between">
-        <Link href="/">
-          <a className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group">
             <img 
               src="/images/logo-flowcargo.png" 
               alt="FlowCargo Logo" 
               className="h-12 w-auto object-contain"
             />
-          </a>
         </Link>
 
         {/* Desktop Nav */}
