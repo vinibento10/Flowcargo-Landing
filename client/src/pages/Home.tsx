@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -7,33 +6,10 @@ import { N8nChat } from "@/components/N8nChat";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { ArrowRight, CheckCircle2, Clock, MessageSquare, Truck, BarChart3, ShieldCheck, Zap } from "lucide-react";
 import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
+import { motion } from "framer-motion";
+import { MobileCTA } from "@/components/MobileCTA";
 
 export default function Home() {
-  // Simple intersection observer for fade-in animations
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-in", "fade-in", "slide-in-from-bottom-8");
-            entry.target.classList.remove("opacity-0", "translate-y-8");
-            observerRef.current?.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll(".reveal").forEach((el) => {
-      el.classList.add("opacity-0", "translate-y-8", "transition-all", "duration-700", "ease-out");
-      observerRef.current?.observe(el);
-    });
-
-    return () => observerRef.current?.disconnect();
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#040406] text-foreground overflow-x-hidden font-sans selection:bg-[#7b61ff]/30 selection:text-white">
       <Header />
@@ -47,7 +23,11 @@ export default function Home() {
           
           <div className="container relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="reveal">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#18d4d4] text-sm font-medium mb-6 backdrop-blur-sm">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#18d4d4] opacity-75"></span>
@@ -56,19 +36,39 @@ export default function Home() {
                   Solução para transportadoras e terminais
                 </div>
                 
-                <h1 className="font-space text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-white">
+                <motion.h1 
+                  className="font-space text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
                   Ordene filas, <br />
                   <span className="text-gradient-brand">agilize coletas</span> e <br />
                   comunique motoristas.
-                </h1>
+                </motion.h1>
                 
-          <h2 className="text-xl md:text-2xl font-medium text-[#18d4d4] mb-4 reveal delay-50">
-                Automação Logística Inteligente
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg reveal delay-100 leading-relaxed">
-                FlowCargo organiza o fluxo de caminhões, agenda coletas/descargas, notifica motoristas via WhatsApp e gera relatórios em tempo real — tudo integrado ao seu ERP/CRM para eliminar filas e custos extras.
-              </p>               
-                <div className="flex flex-wrap gap-4">
+                <motion.h2 
+                  className="text-xl md:text-2xl font-medium text-[#18d4d4] mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                  Automação Logística Inteligente
+                </motion.h2>
+                <motion.p 
+                  className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  FlowCargo organiza o fluxo de caminhões, agenda coletas/descargas, notifica motoristas via WhatsApp e gera relatórios em tempo real — tudo integrado ao seu ERP/CRM para eliminar filas e custos extras.
+                </motion.p>               
+                <motion.div 
+                  className="flex flex-wrap gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                >
                   <Button 
                     size="lg" 
                     className="bg-gradient-brand hover:opacity-90 text-white font-bold h-12 px-8 rounded-xl shadow-[0_0_20px_rgba(123,97,255,0.3)] hover:shadow-[0_0_30px_rgba(123,97,255,0.5)] transition-all duration-300 hover:-translate-y-1"
@@ -87,9 +87,14 @@ export default function Home() {
                       Ver como funciona <ArrowRight size={16} />
                     </a>
                   </Button>
-                </div>
+                </motion.div>
 
-                <div className="mt-12 flex items-center gap-6 text-sm text-muted-foreground">
+                <motion.div 
+                  className="mt-12 flex items-center gap-6 text-sm text-muted-foreground"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                >
                   <div className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-[#18d4d4]" />
                     <span>Setup rápido</span>
@@ -102,10 +107,15 @@ export default function Home() {
                     <CheckCircle2 size={16} className="text-[#18d4d4]" />
                     <span>Cancelamento grátis</span>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               
-              <div className="reveal delay-200 relative perspective-1000">
+              <motion.div 
+                className="relative perspective-1000"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              >
                 <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-[#0b0b0f]/80 backdrop-blur-xl group transform transition-all duration-700 hover:rotate-y-2 hover:scale-[1.02]">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#7b61ff]/20 to-[#18d4d4]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
                   
@@ -122,16 +132,26 @@ export default function Home() {
                   />
                   
                   {/* Floating KPI Card 1 - 3D Effect */}
-                  <div className="absolute top-6 right-6 glass-panel p-4 rounded-xl flex flex-col gap-1 animate-in fade-in zoom-in duration-700 delay-500 shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-white/10 backdrop-blur-md transform transition-transform hover:translate-z-10">
+                  <motion.div 
+                    className="absolute top-6 right-6 glass-panel p-4 rounded-xl flex flex-col gap-1 shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-white/10 backdrop-blur-md transform transition-transform hover:translate-z-10"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8, duration: 0.5 }}
+                  >
                     <span className="text-xs text-muted-foreground uppercase tracking-wider">Tempo médio</span>
                     <span className="text-2xl font-bold text-white">18 min</span>
                     <span className="text-xs text-[#18d4d4] flex items-center gap-1">
                       <ArrowRight size={10} className="rotate-45" /> -35% vs ontem
                     </span>
-                  </div>
+                  </motion.div>
 
                   {/* Floating KPI Card 2 - 3D Effect */}
-                  <div className="absolute bottom-6 left-6 glass-panel p-4 rounded-xl flex items-center gap-4 animate-in fade-in zoom-in duration-700 delay-700 shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-white/10 backdrop-blur-md transform transition-transform hover:translate-z-10">
+                  <motion.div 
+                    className="absolute bottom-6 left-6 glass-panel p-4 rounded-xl flex items-center gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.3)] border border-white/10 backdrop-blur-md transform transition-transform hover:translate-z-10"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1, duration: 0.5 }}
+                  >
                     <div className="h-10 w-10 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg shadow-[#25D366]/20 animate-pulse">
                       <MessageSquare size={20} />
                     </div>
@@ -139,13 +159,13 @@ export default function Home() {
                       <div className="text-sm font-bold text-white">Notificação enviada</div>
                       <div className="text-xs text-muted-foreground">Motorista João • Placa ABC-1234</div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
                 
                 {/* Enhanced Decorative Elements */}
                 <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#7b61ff] rounded-full blur-[100px] opacity-30 animate-pulse" />
                 <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#18d4d4] rounded-full blur-[100px] opacity-30 animate-pulse delay-1000" />
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -179,18 +199,31 @@ export default function Home() {
         {/* FEATURES SECTION */}
         <section id="features" className="py-24 relative">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-16 reveal">
+            <motion.div 
+              className="text-center max-w-3xl mx-auto mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <h2 className="font-space text-3xl md:text-4xl font-bold text-white mb-4">
                 Tecnologia que <span className="text-gradient-brand">transforma</span> sua operação
               </h2>
               <p className="text-muted-foreground text-lg">
                 Uma suíte completa de ferramentas para automatizar processos manuais e dar visibilidade total à sua logística.
               </p>
-            </div>
+            </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {/* Feature 1 */}
-              <div className="reveal glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]">
+              <motion.div 
+                className="glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                whileHover={{ scale: 1.03 }}
+              >
                 <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
@@ -210,10 +243,17 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Feature 2 */}
-              <div className="reveal delay-100 glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#18d4d4]/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(24,212,212,0.15)]">
+              <motion.div 
+                className="glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#18d4d4]/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(24,212,212,0.15)]"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                whileHover={{ scale: 1.03 }}
+              >
                 <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
@@ -233,10 +273,17 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Feature 3 */}
-<div className="reveal delay-200 glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]">
+              <motion.div 
+                className="glass-panel rounded-[24px] p-1 overflow-hidden group hover:border-[#7b61ff]/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(123,97,255,0.15)]"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ scale: 1.03 }}
+              >
                 <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
@@ -256,7 +303,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -265,7 +312,12 @@ export default function Home() {
         <section id="how" className="py-24 bg-white/[0.02] border-y border-white/5">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="reveal">
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
                 <h2 className="font-space text-3xl md:text-4xl font-bold text-white mb-6">
                   Como funciona
                 </h2>
@@ -291,7 +343,14 @@ export default function Home() {
                       desc: "O FlowCargo assume o controle: agenda, notifica e monitora tudo automaticamente." 
                     }
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-6 group">
+                    <motion.div 
+                      key={i} 
+                      className="flex gap-6 group"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.2 }}
+                    >
                       <div className="flex-shrink-0 w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center font-bold text-[#18d4d4] group-hover:bg-[#18d4d4] group-hover:text-black transition-colors duration-300">
                         {item.step}
                       </div>
@@ -303,12 +362,17 @@ export default function Home() {
                           {item.desc}
                         </p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="reveal delay-200">
+              <motion.div 
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
                 <div className="glass-panel p-8 rounded-2xl relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-4 opacity-20">
                     <Zap size={120} />
@@ -347,7 +411,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -355,9 +419,15 @@ export default function Home() {
         {/* TESTIMONIALS */}
         <section className="py-24">
           <div className="container">
-            <h2 className="font-space text-3xl md:text-4xl font-bold text-white text-center mb-12 reveal">
+            <motion.h2 
+              className="font-space text-3xl md:text-4xl font-bold text-white text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               O que nossos clientes dizem
-            </h2>
+            </motion.h2>
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
@@ -377,7 +447,15 @@ export default function Home() {
                   stars: 5
                 }
               ].map((t, i) => (
-                <div key={i} className="reveal glass-panel p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300">
+                <motion.div 
+                  key={i} 
+                  className="glass-panel p-8 rounded-2xl"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.2 }}
+                  whileHover={{ y: -10 }}
+                >
                   <div className="flex gap-1 text-yellow-400 mb-4">
                     {[...Array(t.stars)].map((_, i) => (
                       <span key={i}>★</span>
@@ -387,7 +465,7 @@ export default function Home() {
                   <div className="font-bold text-white border-l-4 border-[#7b61ff] pl-3">
                     {t.company}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -398,9 +476,20 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#7b61ff]/10 pointer-events-none" />
           
           <div className="container relative z-10">
-            <div className="glass-panel rounded-3xl p-8 md:p-12 lg:p-16 max-w-5xl mx-auto border-[#7b61ff]/30 shadow-[0_0_50px_rgba(123,97,255,0.1)]">
+            <motion.div 
+              className="glass-panel rounded-3xl p-8 md:p-12 lg:p-16 max-w-5xl mx-auto border-[#7b61ff]/30 shadow-[0_0_50px_rgba(123,97,255,0.1)]"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
               <div className="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
                   <h2 className="font-space text-3xl md:text-4xl font-bold text-white mb-6">
                     Pronto para otimizar sua logística?
                   </h2>
@@ -422,9 +511,15 @@ export default function Home() {
                       Treinamento para equipe
                     </li>
                   </ul>
-                </div>
+                </motion.div>
 
-                <div className="bg-[#040406] p-8 rounded-2xl border border-white/10 shadow-xl">
+                <motion.div 
+                  className="bg-[#040406] p-8 rounded-2xl border border-white/10 shadow-xl"
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
                   <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                     <div>
                       <label className="text-sm font-medium text-muted-foreground mb-1 block">Nome completo</label>
@@ -469,9 +564,9 @@ export default function Home() {
                       Solicitar demonstração
                     </Button>
                   </form>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>
@@ -479,6 +574,7 @@ export default function Home() {
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
+      <MobileCTA />
       <N8nChat />
     </div>
   );

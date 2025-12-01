@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,15 +26,22 @@ export function ScrollToTop() {
   };
 
   return (
-    <button
-      onClick={scrollToTop}
-      className={cn(
-        "fixed bottom-40 right-8 z-40 h-10 w-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white shadow-lg transition-all duration-300 hover:bg-[#7b61ff] hover:scale-110",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          onClick={scrollToTop}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          transition={{ duration: 0.3 }}
+          className="fixed bottom-24 right-6 z-40 h-10 w-10 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white shadow-lg hover:bg-[#7b61ff] hover:shadow-[0_0_15px_rgba(123,97,255,0.5)] md:bottom-8 md:right-8"
+          aria-label="Voltar ao topo"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <ArrowUp size={20} />
+        </motion.button>
       )}
-      aria-label="Voltar ao topo"
-    >
-      <ArrowUp size={20} />
-    </button>
+    </AnimatePresence>
   );
 }
