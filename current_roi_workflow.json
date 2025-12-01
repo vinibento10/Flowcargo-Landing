@@ -1,0 +1,204 @@
+{
+  "updatedAt": "2025-12-01T21:44:34.000Z",
+  "createdAt": "2025-12-01T21:27:49.507Z",
+  "id": "znyx0u9FUejtgeJZ",
+  "name": "FlowCargo ROI Report Generator",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "roi-report",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        176
+      ],
+      "id": "287c7eed-6ca1-48b0-a011-093e041a8334",
+      "webhookId": "72607157-1c64-4e5c-bd7a-7d7cf820e1f9"
+    },
+    {
+      "parameters": {
+        "functionCode": "xfsf"
+      },
+      "name": "Generate HTML",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        176
+      ],
+      "id": "42ea1c3f-df25-408f-9695-d69fbfda1a2f"
+    },
+    {
+      "parameters": {
+        "fromEmail": "viniciusalves@mindlinklab.com.br",
+        "toEmail": "={{json.body.email}}",
+        "subject": "Seu Relat\u00f3rio de ROI FlowCargo",
+        "text": "Ol\u00e1, segue em anexo o seu relat\u00f3rio de economia projetada.",
+        "attachments": "data",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        304,
+        176
+      ],
+      "id": "9ddc3c70-9b9f-41f3-a6d3-31d3733ed45b",
+      "credentials": {
+        "smtp": {
+          "id": "XxpUU4FC24k7ELwG",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "html_content": "mkm",
+        "css_content": "n m m",
+        "output_format": "file"
+      },
+      "type": "n8n-nodes-htmlcsstopdf.htmlcsstopdf",
+      "typeVersion": 1,
+      "position": [
+        96,
+        176
+      ],
+      "id": "f9f4e86a-b3d7-4334-a66f-b0d87e192595",
+      "name": "HTML to PDF",
+      "credentials": {
+        "htmlcsstopdfApi": {
+          "id": "uPPxlmVVBCplIsmX",
+          "name": "HTML to PDF account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generate HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate HTML": {
+      "main": [
+        [
+          {
+            "node": "HTML to PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML to PDF": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": true,
+    "timeSavedPerExecution": 1
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "7c15042a-04a1-472b-9f3f-a4daf48198b5",
+  "versionCounter": 30,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2025-12-01T21:27:49.512Z",
+      "createdAt": "2025-12-01T21:27:49.512Z",
+      "role": "workflow:owner",
+      "workflowId": "znyx0u9FUejtgeJZ",
+      "projectId": "ZDbRiUd9ScgLwdOU",
+      "project": {
+        "updatedAt": "2025-11-14T12:10:46.239Z",
+        "createdAt": "2025-11-14T11:54:52.835Z",
+        "id": "ZDbRiUd9ScgLwdOU",
+        "name": "Vin\u00edcius Alves Bento <vinibento10@hotmail.com>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "projectRelations": [
+          {
+            "updatedAt": "2025-11-14T11:54:52.835Z",
+            "createdAt": "2025-11-14T11:54:52.835Z",
+            "userId": "a0f7abb8-98ed-428b-99b1-b93a03cfdef1",
+            "projectId": "ZDbRiUd9ScgLwdOU",
+            "user": {
+              "updatedAt": "2025-12-01T13:19:05.000Z",
+              "createdAt": "2025-11-14T11:54:52.351Z",
+              "id": "a0f7abb8-98ed-428b-99b1-b93a03cfdef1",
+              "email": "vinibento10@hotmail.com",
+              "firstName": "Vin\u00edcius Alves",
+              "lastName": "Bento",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2025-11-14T12:11:34.958Z",
+                "personalization_survey_n8n_version": "1.103.2",
+                "companySize": "<20",
+                "companyType": "systems-integrator",
+                "role": "business-owner",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "xmgnDHr3p0mbqTK7",
+                "userActivatedAt": 1763135732879,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1763404490190
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2025-12-01",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2025-12-01T21:27:38.611Z",
+      "createdAt": "2025-12-01T21:27:38.611Z",
+      "id": "RipknRm9G5Gz2Yw5",
+      "name": "landing page flow cargo"
+    }
+  ]
+}

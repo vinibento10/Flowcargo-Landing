@@ -1,0 +1,100 @@
+{
+  "name": "FlowCargo ROI Report Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "roi-report",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "html": "<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; color: #333; }\n  .header { background: #0b0b0f; color: white; padding: 20px; text-align: center; }\n  .content { padding: 40px; }\n  .highlight { color: #7b61ff; font-weight: bold; }\n  .savings-box { background: #f0f0f5; padding: 20px; border-radius: 10px; margin: 20px 0; }\n</style>\n</head>\n<body>\n  <div class=\"header\">\n    <h1>Relatório de Economia FlowCargo</h1>\n  </div>\n  <div class=\"content\">\n    <h2>Olá,</h2>\n    <p>Aqui está o detalhamento da economia projetada para sua operação:</p>\n    \n    <div class=\"savings-box\">\n      <h3>Economia Mensal Estimada: R$ {{json.body.data.savings.monthly}}</h3>\n      <h3>Economia Anual Estimada: R$ {{json.body.data.savings.yearly}}</h3>\n      <p>Horas ganhas por mês: {{json.body.data.savings.time}} horas</p>\n    </div>\n\n    <p>Baseado nos dados fornecidos:</p>\n    <ul>\n      <li>Caminhões/dia: {{json.body.data.trucksPerDay}}</li>\n      <li>Tempo de espera atual: {{json.body.data.waitTime}} min</li>\n      <li>Custo hora: R$ {{json.body.data.hourlyCost}}</li>\n    </ul>\n\n    <p>Para implementar essa economia, agende uma conversa com nossos especialistas.</p>\n  </div>\n</body>\n</html>"
+      },
+      "name": "Generate HTML",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://api.pdfmonkey.io/api/v1/documents",
+        "method": "POST",
+        "authentication": "headerAuth",
+        "headerAuth": "pdfmonkey_api_key",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "{\n  \"document\": {\n    \"document_template_id\": \"YOUR_TEMPLATE_ID\",\n    \"payload\": {\n      \"monthly_savings\": \"{{json.body.data.savings.monthly}}\",\n      \"yearly_savings\": \"{{json.body.data.savings.yearly}}\",\n      \"time_saved\": \"{{json.body.data.savings.time}}\"\n    },\n    \"status\": \"pending\"\n  }\n}"
+      },
+      "name": "Generate PDF (PDFMonkey)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@flowcargo.com.br",
+        "toEmail": "={{json.body.email}}",
+        "subject": "Seu Relatório de ROI FlowCargo",
+        "text": "Olá, segue em anexo o seu relatório de economia projetada.",
+        "attachments": "data"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generate HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate HTML": {
+      "main": [
+        [
+          {
+            "node": "Generate PDF (PDFMonkey)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate PDF (PDFMonkey)": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
