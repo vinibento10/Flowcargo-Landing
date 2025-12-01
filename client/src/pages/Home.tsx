@@ -94,9 +94,9 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  Ordene filas, <br />
-                  <span className="text-gradient-brand">agilize coletas</span> e <br />
-                  comunique motoristas.
+                  Elimine filas, <br />
+                  <span className="text-gradient-brand">automatize o pátio</span> e <br />
+                  reduza custos logísticos.
                 </motion.h1>
                 
                 <motion.h2 
@@ -113,7 +113,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  FlowCargo organiza o fluxo de caminhões, agenda coletas/descargas, notifica motoristas via WhatsApp e gera relatórios em tempo real — tudo integrado ao seu ERP/CRM para eliminar filas e custos extras.
+                  A plataforma completa para gestão de pátio e agendamento de docas. Reduza o tempo de espera em até 40% e integre toda a comunicação com motoristas via WhatsApp automaticamente.
                 </motion.p>               
                 <motion.div 
                   className="flex flex-wrap gap-4"
@@ -126,7 +126,7 @@ export default function Home() {
                     className="bg-gradient-brand hover:opacity-90 text-white font-bold h-12 px-8 rounded-xl shadow-[0_0_20px_rgba(123,97,255,0.3)] hover:shadow-[0_0_30px_rgba(123,97,255,0.5)] transition-all duration-300 hover:-translate-y-1"
                     asChild
                   >
-                    <a href="#contact">Solicitar demonstração</a>
+                    <a href="#contact">Agendar demonstração grátis</a>
                   </Button>
                   
                   <Button 
@@ -136,7 +136,7 @@ export default function Home() {
                     asChild
                   >
                     <a href="#how" className="flex items-center gap-2">
-                      Ver como funciona <ArrowRight size={16} />
+                      Ver tour do produto <ArrowRight size={16} />
                     </a>
                   </Button>
                 </motion.div>
@@ -543,10 +543,10 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <h2 className="font-space text-3xl md:text-4xl font-bold text-white mb-6">
-                    Pronto para otimizar sua logística?
+                    Transforme sua operação logística hoje
                   </h2>
                   <p className="text-muted-foreground text-lg mb-8">
-                    Agende uma demonstração gratuita e descubra como o FlowCargo pode reduzir custos e aumentar a eficiência da sua operação em dias.
+                    Junte-se a líderes do setor que reduziram custos operacionais em 30% no primeiro mês. Implementação guiada e suporte especialista.
                   </p>
                   
                   <ul className="space-y-4 mb-8">
