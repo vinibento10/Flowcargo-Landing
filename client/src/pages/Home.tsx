@@ -5,7 +5,8 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { N8nChat } from "@/components/N8nChat";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import { ArrowRight, CheckCircle2, Clock, MessageSquare, BarChart3, Truck, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, MessageSquare, Truck, BarChart3, ShieldCheck, Zap } from "lucide-react";
+import { ImageWithSkeleton } from "@/components/ImageWithSkeleton";
 
 export default function Home() {
   // Simple intersection observer for fade-in animations
@@ -193,11 +194,10 @@ export default function Home() {
                 <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
-                    <img 
+                    <ImageWithSkeleton 
                       src="/images/feature-automation.webp" 
                       alt="Agendamento Automatizado" 
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6 relative z-20 -mt-12">
@@ -217,11 +217,10 @@ export default function Home() {
                 <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
-                    <img 
+                    <ImageWithSkeleton 
                       src="/images/feature-whatsapp-notification.webp" 
                       alt="Notificações WhatsApp" 
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6 relative z-20 -mt-12">
@@ -241,11 +240,10 @@ export default function Home() {
                 <div className="bg-[#0b0b0f] rounded-[20px] h-full overflow-hidden">
                   <div className="h-48 overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] to-transparent z-10" />
-                    <img 
+                    <ImageWithSkeleton 
                       src="/images/logistics-terminal-night.webp" 
                       alt="Gestão de Filas" 
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                   <div className="p-6 relative z-20 -mt-12">
