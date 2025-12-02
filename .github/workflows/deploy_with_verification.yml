@@ -1,0 +1,217 @@
+name: Deploy with Secrets Verification
+
+on:
+  push:
+    branches: [ main ]
+  workflow_run:
+    workflows: ["Verify Secrets"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  check_verification:
+    runs-on: ubuntu-latest
+    name: Check Secrets Verification Status
+    
+    steps:
+      - name: Download verification report from previous workflow
+        uses: actions/download-artifact@v4
+        with:
+          name: secrets-verification-report
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+      
+      - name: Check if secrets are verified
+        id: check
+        run: |
+          if [ -f "secrets_verification_"*.json ]; then
+            echo "Report found, checking status..."
+            
+            COMPLETE=$(python3 -c "
+            import json
+            import glob
+            
+            try:
+              report_file = glob.glob('secrets_verification_*.json')[0]
+              with open(report_file, 'r') as f:
+                data = json.load(f)
+                complete = data['summary']['required']['complete']
+                print('true' if complete else 'false')
+            except:
+              print('false')
+            ")
+            
+            echo "secrets_complete=$COMPLETE" >> $GITHUB_OUTPUT
+            
+            if [ "$COMPLETE" = "true" ]; then
+              echo "✅ Secrets verification passed"
+            else
+              echo "❌ Secrets verification failed"
+            fi
+          else
+            echo "⚠️  No verification report found"
+            echo "secrets_complete=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Fail if secrets not verified
+        if: steps.check.outputs.secrets_complete == 'false'
+        run: |
+          echo "❌ Deploy blocked: Secrets verification failed"
+          echo ""
+          echo "Please ensure all required secrets are configured:"
+          echo "https://github.com/${{ github.repository }}/settings/secrets/actions"
+          exit 1
+      
+      - name: Notify secrets verified
+        if: steps.check.outputs.secrets_complete == 'true'
+        run: |
+          echo "✅ All required secrets verified"
+          echo "✅ Deploy can proceed"
+
+  deploy_after_verification:
+    runs-on: ubuntu-latest
+    name: Deploy to Vercel
+    needs: check_verification
+    if: success()
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'pnpm'
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Build project
+        run: pnpm run build
+        env:
+          VITE_N8N_WEBHOOK_URL: ${{ secrets.VITE_N8N_WEBHOOK_URL }}
+          VITE_PDFMONKEY_API_KEY: ${{ secrets.VITE_PDFMONKEY_API_KEY }}
+          VITE_ANALYTICS_ENDPOINT: ${{ secrets.VITE_ANALYTICS_ENDPOINT }}
+          VITE_ANALYTICS_WEBSITE_ID: ${{ secrets.VITE_ANALYTICS_WEBSITE_ID }}
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+      
+      - name: Send success notification
+        if: success()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "✅ FlowCargo Landing Deployed Successfully",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*✅ Deployment Successful*\n\nFlowCargo Landing foi deployado com sucesso!"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Repository:*\n${{ github.repository }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch:*\nmain"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Commit:*\n${{ github.sha }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Author:*\n${{ github.actor }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Site"
+                      },
+                      "url": "https://flowcargo-landing.vercel.app"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Workflow"
+                      },
+                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                    }
+                  ]
+                }
+              ]
+            }
+        if: always()
+      
+      - name: Send failure notification
+        if: failure()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "❌ FlowCargo Landing Deployment Failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*❌ Deployment Failed*\n\nO deploy do FlowCargo Landing falhou."
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Repository:*\n${{ github.repository }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch:*\nmain"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Logs"
+                      },
+                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                    }
+                  ]
+                }
+              ]
+            }
+        if: always()
