@@ -22,8 +22,29 @@ export default function Home() {
     empresa: "" // Added empresa field to state as it might be useful, though not in current form UI shown in snippet but good practice or if we add it back
   });
 
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const re = /^(\+55)?[\s]?(\d{2})[\s]?(\d{4,5})[\s]?(\d{4})$/;
+    return re.test(phone);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateEmail(formData.email)) {
+      toast.error("Por favor, insira um e-mail válido.");
+      return;
+    }
+
+    if (!validatePhone(formData.telefone)) {
+      toast.error("Por favor, insira um telefone válido com DDD.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
