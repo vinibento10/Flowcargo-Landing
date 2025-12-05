@@ -26,6 +26,8 @@ export function ImageWithSkeleton({ className, src, alt, ...props }: ImageWithSk
       <img
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
         className={cn(
           "w-full h-full object-cover transition-all duration-700 ease-in-out",
           isLoaded ? "opacity-100 blur-0 scale-100" : "opacity-0 blur-xl scale-105"
